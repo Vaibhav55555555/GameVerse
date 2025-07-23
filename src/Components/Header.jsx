@@ -47,13 +47,17 @@ function Header() {
         className="bg-transparent w-full outline-none pl-2 items-center rounded-full"  />
       </div>
       <div className="flex items-center ml-4 space-x-2">
-        <button className="relative flex items-center justify-center h-12 w-12 bg-slate-200 rounded-lg border-2 border-blue-600 focus:outline-none" onClick={() => setCartOpen(!cartOpen)}>
-          <HiOutlineShoppingCart className="text-2xl dark:text-white" />
+        <button className="relative flex items-center justify-center h-15 w-15 bg-slate-200 rounded-lg border-2 border-blue-600 focus:outline-none" onClick={() => setCartOpen(!cartOpen)}>
+          <HiOutlineShoppingCart className="text-8xl dark:text-white" />
           {cart.length > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1">{cart.length}</span>
           )}
         </button>
-        {/* Theme toggle or other icons here */}
+        <span className="flex items-center h-12">
+          {theme=='dark'?  <HiSun className="text-[32px] cursor-pointer bg-gray-200 text-black p-1 rounded-full align-middle" onClick={()=>setTheme('light')} />
+            :
+            <HiMoon className="text-[32px] cursor-pointer bg-gray-200 text-black p-1 rounded-full align-middle" onClick={()=>setTheme('dark')} />}
+        </span>
       </div>
       {/* Cart dropdown/modal placeholder */}
       {cartOpen && (
@@ -110,14 +114,6 @@ function Header() {
        
       :null} */}
       {/* <label className="ml-2">Dark</label> */}
-      <div>
-      {theme=='dark'?  <HiSun className="text-[35px] cursor-pointer
-       bg-gray-200 text-black p-1 rounded-full " 
-        onClick={()=>setTheme('light')} />
-        :
-        <HiMoon className="text-[35px] cursor-pointer bg-gray-200 text-black p-1 rounded-full" 
-        onClick={()=>setTheme('dark')} />}
-      </div>
     </div>
   );
 }
