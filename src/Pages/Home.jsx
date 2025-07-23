@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import SideNavGenreList from '../Componets/SideNavGenreList'
-import GlobalApi from '../Servies.js/GlobalApi'
-import Slider from '../Componets/Slider'
-import PopularGameList from '../Componets/PopularGameList'
-import TrendingGameList from '../Componets/TrendingGameList'
+import SideNavGenreList from '../Components/SideNavGenreList'
+import GlobalApi from '../Servies.js/GlobalApi.jsx'
+import Slider from '../Components/Slider'
+import PopularGameList from '../Components/PopularGameList'
+import TrendingGameList from '../Components/TrendingGameList'
 
 function Home() {
     const [gameList,setGameList]=useState([])
@@ -13,9 +13,12 @@ function Home() {
 
     useEffect(()=>{
       
-      GlobalApi.getPopularGame.then(resp=>{
-        console.log(resp)
-        setGameList(resp.data.results);
+      GlobalApi.getPopularGame().then(resp=>{
+        const gamesWithPrice = resp.data.results.map(game => ({
+          ...game,
+          price: (Math.random() * 50 + 10).toFixed(2) // $10 - $60
+        }));
+        setGameList(gamesWithPrice);
        
     })
     getGameList(4)
@@ -25,8 +28,11 @@ function Home() {
       if(genreId!=0)
       {
         GlobalApi.getGameListByGenreId(genreId).then(resp=>{
-          console.log(resp)
-          setGameListByGenre(resp.data.results)
+          const gamesWithPrice = resp.data.results.map(game => ({
+            ...game,
+            price: (Math.random() * 50 + 10).toFixed(2)
+          }));
+          setGameListByGenre(gamesWithPrice)
       })
       }
      

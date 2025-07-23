@@ -7,7 +7,7 @@ const axioCreate= axios.create({
     // },
   });
   
-const getPopularGame=axioCreate.get('/games?key='+key)
+const getPopularGame = () => axioCreate.get('/games?key=' + key)
 const getMovieDetails=(id)=>axioCreate.get('/games/'+id+'/movies')
 const getGameListByGenreId=(id)=>axioCreate.get('/games?key='+key+'&genres='+id)
 export default{
